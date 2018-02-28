@@ -155,6 +155,19 @@
   <script>
   	$("#submit").click(function(event) {
   		event.preventDefault();
+
+  		$.get("/api/friends", function(data) {
+  			console.log(data);
+  			for(var i = 0; i < data.length; i++) {
+  				console.log(data[i].scores)
+  			}
+  			// for(var i = 0; i < data.scores.length; i++) {
+  			// 	if($("#q1") === data.scores[0]) {
+  			// 		console.log("it matches!");
+  			// 	}
+  			// }
+
+  		})
   	});
   </script>
 </body>
