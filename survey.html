@@ -157,16 +157,17 @@
   		event.preventDefault();
 
   		$.get("/api/friends", function(data) {
-  			console.log(data);
+  			// console.log(data);
   			for(var i = 0; i < data.length; i++) {
   				console.log(data[i].scores)
-  			}
-  			// for(var i = 0; i < data.scores.length; i++) {
-  			// 	if($("#q1") === data.scores[0]) {
-  			// 		console.log("it matches!");
-  			// 	}
-  			// }
+				//  ["5", "1", "4", "4", "5", "1", "2", "5", "4", "1"]
 
+	  			if($("#q" + (i+1)).val() == data[i].scores[i]) {
+					console.log("matched");
+				} else {
+					console.log("didn't match");
+				}
+  			}
   		})
   	});
   </script>
