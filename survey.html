@@ -183,11 +183,10 @@
 	 			// 	data[i].scores.map(Number).reduce((a, b) => a + b, 0)
 	 			// 	);
 	 			var friendSum = data[i].scores.map(Number).reduce((a, b) => a + b, 0);
- 				totalDifference.push(friendSum);
+ 				totalDifference.push(Math.abs(userSum - friendSum));
 			};
 		});
 		console.log(totalDifference);
-		// console.log(totalDifference);
 	});
   </script>
 </body>
