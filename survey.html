@@ -154,22 +154,30 @@
 
   <script>
   	$("#submit").click(function(event) {
-  		event.preventDefault();
+		event.preventDefault();
+	  	
+	  	var userData = [];
 
-  		$.get("/api/friends", function(data) {
-  			// console.log(data);
-  			for(var i = 0; i < data.length; i++) {
-  				console.log(data[i].scores)
-				//  ["5", "1", "4", "4", "5", "1", "2", "5", "4", "1"]
+		function getUserData() {
+			for(i = 1; i < 11; i++) {
+				if($("#q" + i).val() !== "Select an Option") {
+					userData.push(parseInt($("#q" + i).val()));					
+				};
+			};
+		};
+		//calling function to get user choices
+		getUserData();
 
-	  			if($("#q" + (i+1)).val() == data[i].scores[i]) {
-					console.log("matched");
-				} else {
-					console.log("didn't match");
-				}
-  			}
-  		})
-  	});
+		var userSum = userData.reduce((a, b) => a + b, 0);
+		console.log(userSum);
+		console.log(userData);
+
+		// $.get("/api/friends", function(data) {
+		// 	for(var i = 0; i < data.length; i++) {
+ 	// 		// console.log(data[i].scores)
+		// 	};
+		// });
+	});
   </script>
 </body>
 </html>
