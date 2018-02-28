@@ -157,6 +157,8 @@
 		event.preventDefault();
 	  	
 	  	var userData = [];
+	  	var totalDifference = [];
+	  	// var friendSum = [];
 
 		function getUserData() {
 			for(i = 1; i < 11; i++) {
@@ -172,11 +174,20 @@
 		console.log(userSum);
 		console.log(userData);
 
-		// $.get("/api/friends", function(data) {
-		// 	for(var i = 0; i < data.length; i++) {
- 	// 		// console.log(data[i].scores)
-		// 	};
-		// });
+		$.get("/api/friends", function(data) {
+			for(var i = 0; i < data.length; i++) {
+	 			// console.log(data[i].scores)
+	 			//10 arrays
+	 			// console.log(data[i].scores.map(Number));
+	 			// friendSum.push(
+	 			// 	data[i].scores.map(Number).reduce((a, b) => a + b, 0)
+	 			// 	);
+	 			var friendSum = data[i].scores.map(Number).reduce((a, b) => a + b, 0);
+ 				totalDifference.push(friendSum);
+			};
+		});
+		console.log(totalDifference);
+		// console.log(totalDifference);
 	});
   </script>
 </body>
