@@ -157,7 +157,9 @@
 		event.preventDefault();
 	  	
 	  	var userData = [];
-	  	var totalDifference = [];
+      var lowScore = 40;
+	  	var totalDifference = 0;
+      var newFriendIndex = 0;
 	  	// var friendSum = [];
 
 		function getUserData() {
@@ -176,17 +178,20 @@
 
 		$.get("/api/friends", function(data) {
 			for(var i = 0; i < data.length; i++) {
-	 			// console.log(data[i].scores)
-	 			//10 arrays
-	 			// console.log(data[i].scores.map(Number));
-	 			// friendSum.push(
-	 			// 	data[i].scores.map(Number).reduce((a, b) => a + b, 0)
-	 			// 	);
+        //takes the sum of scores for each friend
 	 			var friendSum = data[i].scores.map(Number).reduce((a, b) => a + b, 0);
- 				totalDifference.push(Math.abs(userSum - friendSum));
+        //finding the difference between the user sum and friend sum
+ 				totalDifference += Math.abs(userSum - friendSum);
+        if(totalDifference <= lowScore) {
+          lowScore = totalDifference;
+          //only gives you the index that meets the condition
+          newFriendIndex = i
+          totalDifference = 0;
+        }
+        totalDifference = 0;
 			};
+      console.log("Your new best friend is: " + data[newFriendIndex].name)
 		});
-		console.log(totalDifference);
 	});
   </script>
 </body>
