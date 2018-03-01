@@ -9,9 +9,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<!-- Chosen -->
-<!-- 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script> -->
+	<!-- Style CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -144,6 +143,17 @@
     <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
      Submit</button>
 
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="friend"></p>
+      </div>
+
+    </div>
+
     <hr>
     <footer class="footer">
       <div class="container">
@@ -173,8 +183,8 @@
 		getUserData();
 
 		var userSum = userData.reduce((a, b) => a + b, 0);
-		console.log(userSum);
-		console.log(userData);
+		// console.log(userSum);
+		// console.log(userData);
 
 		$.get("/api/friends", function(data) {
 			for(var i = 0; i < data.length; i++) {
@@ -190,7 +200,19 @@
         }
         totalDifference = 0;
 			};
-      console.log("Your new best friend is: " + data[newFriendIndex].name)
+      // console.log("Your new best friend is: " + data[newFriendIndex].name);
+      
+      //Modal of friend
+      var modal = document.getElementById("myModal");
+      var span = document.getElementsByClassName("close")[0];
+      function displayModal() {
+       modal.style.display = "block";
+       $("#friend").html(`Your new friend's name is: ${data[newFriendIndex].name} <br><img src="${data[newFriendIndex].photo}"> `)
+      } 
+      displayModal();
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
 		});
 	});
   </script>
